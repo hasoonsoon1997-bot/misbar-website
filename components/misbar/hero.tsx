@@ -2,7 +2,7 @@
 
 import { CheckCircle2 } from "lucide-react";
 
-export default function Hero() {
+export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-navy-dark text-white min-h-[90vh] flex items-center">
       <video
