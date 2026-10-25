@@ -9,6 +9,7 @@ import { HowItWorks } from '@/components/misbar/how-it-works'
 import { Parts } from '@/components/misbar/parts'
 import { RfqForm } from '@/components/misbar/rfq-form'
 import { Footer } from '@/components/misbar/footer'
+import { WhatsAppButton } from '@/components/misbar/whatsapp-button' // السطر الجديد
 
 export default function Page() {
   return (
@@ -23,6 +24,7 @@ export default function Page() {
         <RfqForm />
       </main>
       <Footer />
+      <WhatsAppButton /> {/* الزر العائم */}
     </LanguageProvider>
   )
 }
