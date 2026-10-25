@@ -5,7 +5,7 @@ import { Send, ShieldCheck, CheckCircle2 } from "lucide-react";
 
 export function RfqForm() {
   // ⚠️ استبدل "xyzabcde" بمعرّف النموذج الخاص بك من Formspree
-  const [state, handleSubmit] = useForm("xyzabcde");
+  const [state, handleSubmit] = useForm("xoeejgbv");
 
   if (state.succeeded) {
     return (
