@@ -4,7 +4,7 @@ import { MessageCircle } from "lucide-react";
 
 export function WhatsAppButton() {
   // ضع رقم هاتفك هنا بصيغة دولية بدون أصفار أو علامة +
-  const phoneNumber = "491234567890"; // غير هذا الرقم لرقمك الحقيقي
+  const phoneNumber = "004915786738185"; // غير هذا الرقم لرقمك الحقيقي
   const message = "مرحباً مِسبار، أرغب في الاستفسار عن قطعة غيار.";
   
   const waLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
