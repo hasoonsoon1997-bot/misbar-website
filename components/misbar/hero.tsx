@@ -5,16 +5,14 @@ import { CheckCircle2 } from "lucide-react";
 export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-black text-white min-h-[90vh] flex items-center">
-      {/* فيديو خلفية سينمائي مضمون من رابط خارجي */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-50 z-0"
-      >
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-luxury-car-driving-on-a-highway-34578-large.mp4" type="video/mp4" />
-      </video>
+      {/* خلفية سينمائية (صورة فاخرة مع حركة تكبير بطيئة) */}
+      <div 
+        className="absolute inset-0 w-full h-full z-0 bg-cover bg-center"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=2070&auto=format&fit=crop')`,
+          animation: 'kenburns 20s ease-in-out infinite alternate'
+        }}
+      />
 
       {/* طبقة تعتيم متدرجة */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black z-10" />
@@ -58,6 +56,14 @@ export function Hero() {
           
         </div>
       </div>
+
+      {/* كود CSS لحركة التكبير السينمائية */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes kenburns {
+          0% { transform: scale(1); }
+          100% { transform: scale(1.15); }
+        }
+      `}} />
     </section>
   );
 }
