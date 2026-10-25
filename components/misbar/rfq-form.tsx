@@ -1,11 +1,26 @@
 "use client";
 
-import { Send, ShieldCheck } from "lucide-react";
+import { useForm, ValidationError } from "@formspree/react";
+import { Send, ShieldCheck, CheckCircle2 } from "lucide-react";
 
 export function RfqForm() {
+  // ⚠️ استبدل "xyzabcde" بمعرّف النموذج الخاص بك من Formspree
+  const [state, handleSubmit] = useForm("xyzabcde");
+
+  if (state.succeeded) {
+    return (
+      <section id="rfq" className="py-24 bg-gradient-to-b from-[#05121F] to-[#0B1F3A] relative overflow-hidden">
+        <div className="container-x relative z-10 flex flex-col items-center justify-center min-h-[400px] text-center">
+          <CheckCircle2 className="w-20 h-20 text-green-500 mb-6 animate-bounce" />
+          <h2 className="text-3xl font-bold text-white mb-4">تم إرسال طلبك بنجاح!</h2>
+          <p className="text-gray-400 text-lg">شكراً لثقتك بنا. سيتواصل معك فريقنا في أقرب وقت ممكن.</p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="rfq" className="py-24 bg-gradient-to-b from-[#05121F] to-[#0B1F3A] relative overflow-hidden">
-      {/* إضاءة خلفية */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="container-x relative z-10">
@@ -15,7 +30,7 @@ export function RfqForm() {
             <p className="mt-4 text-lg text-gray-400">املأ النموذج وسيتواصل معك فريقنا خلال ساعات العمل</p>
           </div>
 
-          <form className="p-8 sm:p-10 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl">
+          <form onSubmit={handleSubmit} className="p-8 sm:p-10 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl">
             <div className="grid gap-6 sm:grid-cols-2">
               
               {/* نوع العميل */}
@@ -36,12 +51,14 @@ export function RfqForm() {
 
               <div>
                 <label className="mb-2 block text-sm font-semibold text-gray-300">اسم الورشة أو الاسم الكامل *</label>
-                <input type="text" required className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500 transition-all" placeholder="مثال: ورشة النخبة" />
+                <input type="text" name="name" required className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500 transition-all" placeholder="مثال: ورشة النخبة" />
+                <ValidationError prefix="Name" field="name" errors={state.errors} className="text-red-400 text-xs mt-1" />
               </div>
 
               <div>
                 <label className="mb-2 block text-sm font-semibold text-gray-300">رقم الواتساب *</label>
-                <input type="tel" required className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500 transition-all text-left" placeholder="+966XXXXXXXXX" dir="ltr" />
+                <input type="tel" name="whatsapp" required className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500 transition-all text-left" placeholder="+966XXXXXXXXX" dir="ltr" />
+                <ValidationError prefix="WhatsApp" field="whatsapp" errors={state.errors} className="text-red-400 text-xs mt-1" />
               </div>
 
               <div className="sm:col-span-2">
@@ -49,23 +66,35 @@ export function RfqForm() {
                   رقم الهيكل (VIN) - 17 خانة *
                   <ShieldCheck className="w-4 h-4 text-yellow-500" />
                 </label>
-                <input type="text" required minLength={17} maxLength={17} className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500 transition-all font-mono tracking-widest uppercase" placeholder="17 خانة (بدون I O Q)" dir="ltr" />
+                <input type="text" name="vin" required minLength={17} maxLength={17} className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500 transition-all font-mono tracking-widest uppercase" placeholder="17 خانة (بدون I O Q)" dir="ltr" />
+                <ValidationError prefix="VIN" field="vin" errors={state.errors} className="text-red-400 text-xs mt-1" />
               </div>
 
               <div className="sm:col-span-2">
                 <label className="mb-2 block text-sm font-semibold text-gray-300">اسم القطعة أو رقمها *</label>
-                <input type="text" required className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500 transition-all" placeholder="مثال: ECU أو رقم القطعة" />
+                <input type="text" name="partName" required className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500 transition-all" placeholder="مثال: ECU أو رقم القطعة" />
+                <ValidationError prefix="Part" field="partName" errors={state.errors} className="text-red-400 text-xs mt-1" />
               </div>
 
               <div className="sm:col-span-2">
                 <label className="mb-2 block text-sm font-semibold text-gray-300">ملاحظات إضافية</label>
-                <textarea rows={3} className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500 transition-all" placeholder="أي تفاصيل إضافية..."></textarea>
+                <textarea name="notes" rows={3} className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500 transition-all" placeholder="أي تفاصيل إضافية..."></textarea>
               </div>
             </div>
 
-            <button type="button" className="mt-8 w-full flex items-center justify-center gap-2 rounded-xl bg-yellow-500 px-6 py-4 text-lg font-bold text-black transition-all hover:bg-yellow-400 hover:scale-[1.02] shadow-[0_0_20px_rgba(245,165,36,0.3)]">
-              <Send className="w-5 h-5" />
-              إرسال الطلب
+            <button 
+              type="submit" 
+              disabled={state.submitting}
+              className="mt-8 w-full flex items-center justify-center gap-2 rounded-xl bg-yellow-500 px-6 py-4 text-lg font-bold text-black transition-all hover:bg-yellow-400 hover:scale-[1.02] shadow-[0_0_20px_rgba(245,165,36,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {state.submitting ? (
+                "جاري الإرسال..."
+              ) : (
+                <>
+                  <Send className="w-5 h-5" />
+                  إرسال الطلب
+                </>
+              )}
             </button>
           </form>
         </div>
