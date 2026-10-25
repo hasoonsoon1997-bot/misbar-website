@@ -4,8 +4,8 @@ import { useForm, ValidationError } from "@formspree/react";
 import { Send, ShieldCheck, CheckCircle2 } from "lucide-react";
 
 export function RfqForm() {
-  // ⚠️ استبدل "xyzabcde" بمعرّف النموذج الخاص بك من Formspree
-  const [state, handleSubmit] = useForm("xoeejgbv");
+  // ⚠️ لا تنسى استبدال "xyzabcde" بمعرّف النموذج الخاص بك من Formspree
+  const [state, handleSubmit] = useForm("xyzabcde");
 
   if (state.succeeded) {
     return (
@@ -30,7 +30,8 @@ export function RfqForm() {
             <p className="mt-4 text-lg text-gray-400">املأ النموذج وسيتواصل معك فريقنا خلال ساعات العمل</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="p-8 sm:p-10 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl">
+          {/* تمت إضافة noValidate هنا لتجاوز تحقق المتصفح الإجباري */}
+          <form onSubmit={handleSubmit} noValidate className="p-8 sm:p-10 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl">
             <div className="grid gap-6 sm:grid-cols-2">
               
               {/* نوع العميل */}
@@ -84,7 +85,7 @@ export function RfqForm() {
 
             <button 
               type="submit" 
-              disabled={state.submitting}
+              // تم إزالة disabled={state.submitting} لضمان إمكانية الضغط دائماً أثناء الاختبار
               className="mt-8 w-full flex items-center justify-center gap-2 rounded-xl bg-yellow-500 px-6 py-4 text-lg font-bold text-black transition-all hover:bg-yellow-400 hover:scale-[1.02] shadow-[0_0_20px_rgba(245,165,36,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {state.submitting ? (
