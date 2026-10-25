@@ -7,9 +7,8 @@ export function RfqForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // ⚠️ ضع رابط الـ Endpoint الخاص بك من Formspree هنا
-  // (مثال: https://formspree.io/f/xyzabcde)
-  const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID"; 
+  // ✅ تم وضع رابط Formspree الخاص بك هنا
+  const FORM_ENDPOINT = "https://formspree.io/f/xoeejgbv"; 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
