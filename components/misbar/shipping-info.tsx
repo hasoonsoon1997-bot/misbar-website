@@ -102,7 +102,7 @@ export function ShippingInfo() {
               <strong className="text-white">ملاحظة هامة:</strong> القوانين الجمركية وقواعد منصة سابر قابلة للتحديث. ننصحك بالتحقق من أحدث المتطلبات عبر منصة <span className="font-mono text-yellow-500">saber.sa</span> قبل الطلب.
             </p>
           </div>
-          <a href="https://wa.me/004915786738185" target="_blank" className="shrink-0 inline-flex items-center gap-2 rounded-xl bg-yellow-500 px-5 py-2.5 text-sm font-bold text-black transition-all hover:bg-yellow-400">
+          <a href="https://wa.me/4915786738185" target="_blank" className="shrink-0 inline-flex items-center gap-2 rounded-xl bg-yellow-500 px-5 py-2.5 text-sm font-bold text-black transition-all hover:bg-yellow-400">
             <MessageCircle className="w-4 h-4" />
             استفسر الآن
           </a>
