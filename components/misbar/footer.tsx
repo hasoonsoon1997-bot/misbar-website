@@ -1,72 +1,82 @@
-'use client'
+"use client";
 
-import { Mail, MapPin, MessageCircle } from 'lucide-react'
-import { useLanguage } from './language-provider'
-import { Logo } from './logo'
+import { CheckCircle2 } from "lucide-react";
 
-export function Footer() {
-  const { t } = useLanguage()
-
+export default function Hero() {
   return (
-    <footer className="bg-navy-deep text-white">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 md:grid-cols-3 md:px-6">
-        <div>
-          <Logo label={t.nav.brand} tone="dark" />
-          <p className="mt-5 max-w-xs leading-relaxed text-white/60">{t.footer.tagline}</p>
-        </div>
+    <section id="top" className="relative overflow-hidden bg-navy-dark text-white min-h-[90vh] flex items-center">
+      {/* فيديو الخلفية السينمائي */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-40 z-0"
+      >
+        <source src="/hero-bg.mp4" type="video/mp4" />
+      </video>
 
-        <nav aria-labelledby="footer-links">
-          <h2 id="footer-links" className="text-sm font-bold uppercase tracking-wider text-gold">
-            {t.footer.quickLinks}
-          </h2>
-          <ul className="mt-5 flex flex-col gap-3">
-            {[...t.nav.links, { href: '#quote', label: t.nav.cta }].map((link) => (
-              <li key={link.href}>
-                <a href={link.href} className="text-white/70 transition-colors hover:text-white">
-                  {link.label}
-                </a>
-              </li>
+      {/* طبقة تعتيم متدرجة لإبراز النص */}
+      <div className="absolute inset-0 bg-gradient-to-b from-navy-dark/80 via-navy-dark/60 to-navy-dark z-10" />
+
+      <div className="container-x relative z-20 py-24 sm:py-32 w-full">
+        <div className="mx-auto max-w-4xl text-center space-y-8">
+          
+          {/* شارة علوية */}
+          <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-navy/60 backdrop-blur-md px-5 py-2 text-sm font-medium text-gold shadow-xl">
+            <span className="h-2 w-2 rounded-full bg-gold animate-pulse" />
+            من فرانكفورت مباشرة إلى الخليج
+          </span>
+
+          {/* العنوان الرئيسي */}
+          <h1 className="text-5xl font-extrabold leading-tight sm:text-6xl lg:text-7xl tracking-tight">
+            قطع غيار ألمانية أصلية
+            <span className="mt-4 block bg-gradient-to-r from-gold via-yellow-200 to-gold bg-clip-text text-transparent drop-shadow-lg">
+              تصل بابك خلال 3-5 أيام
+            </span>
+          </h1>
+
+          {/* النص الفرعي */}
+          <p className="mt-6 text-lg text-gray-300 sm:text-xl max-w-2xl mx-auto leading-relaxed">
+            وسيط موثوق لتوريد قطع غيار Mercedes و BMW و Audi و Porsche الأصلية، للورش وأصحاب السيارات. فحص VIN مسبق، فواتير ألمانية أصلية، وأسعار أفضل من الوكيل.
+          </p>
+
+          {/* الأزرار */}
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <a 
+              href="#rfq" 
+              className="group relative inline-flex items-center justify-center gap-2 rounded-xl bg-gold px-8 py-4 text-lg font-bold text-navy transition-all hover:bg-yellow-500 hover:scale-105 shadow-[0_0_20px_rgba(245,165,36,0.3)]"
+            >
+              اطلب عرض سعر الآن
+            </a>
+            <a 
+              href="#how" 
+              className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-white/5 px-8 py-4 text-lg font-bold text-white backdrop-blur-md transition-all hover:bg-white/10 hover:border-white/40"
+            >
+              كيف نعمل؟
+            </a>
+          </div>
+
+          {/* شريط الثقة */}
+          <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {[
+              "شحن من فرانكفورت", 
+              "فحص VIN قبل الشراء", 
+              "توصيل 3-5 أيام", 
+              "فواتير أصلية"
+            ].map((item, idx) => (
+              <div 
+                key={idx} 
+                className="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white/90 backdrop-blur-md"
+              >
+                <CheckCircle2 className="h-4 w-4 text-gold shrink-0" />
+                <span>{item}</span>
+              </div>
             ))}
-          </ul>
-        </nav>
-
-        <div>
-          <h2 className="text-sm font-bold uppercase tracking-wider text-gold">{t.footer.contact}</h2>
-          <ul className="mt-5 flex flex-col gap-4">
-            <li>
-              <a href="https://wa.me/4969000000" className="flex items-center gap-3 text-white/70 hover:text-white">
-                <span className="flex size-9 items-center justify-center rounded-lg bg-white/5 text-gold">
-                  <MessageCircle className="size-4" aria-hidden="true" />
-                </span>
-                <span>
-                  <span className="sr-only">{t.footer.whatsapp}: </span>
-                  <span dir="ltr">+49 69 000 000</span>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="mailto:info@misbar.de" className="flex items-center gap-3 text-white/70 hover:text-white">
-                <span className="flex size-9 items-center justify-center rounded-lg bg-white/5 text-gold">
-                  <Mail className="size-4" aria-hidden="true" />
-                </span>
-                <span>
-                  <span className="sr-only">{t.footer.email}: </span>
-                  info@misbar.de
-                </span>
-              </a>
-            </li>
-            <li className="flex items-center gap-3 text-white/70">
-              <span className="flex size-9 items-center justify-center rounded-lg bg-white/5 text-gold">
-                <MapPin className="size-4" aria-hidden="true" />
-              </span>
-              {t.footer.location}
-            </li>
-          </ul>
+          </div>
+          
         </div>
       </div>
-      <div className="border-t border-white/10">
-        <p className="mx-auto max-w-7xl px-4 py-6 text-center text-sm text-white/50 md:px-6">{t.footer.legal}</p>
-      </div>
-    </footer>
-  )
+    </section>
+  );
 }
