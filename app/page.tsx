@@ -1,3 +1,5 @@
+"use client";
+
 import { LanguageProvider } from '@/components/misbar/language-provider'
 import { Navbar } from '@/components/misbar/navbar'
 import { Hero } from '@/components/misbar/hero'
@@ -7,9 +9,6 @@ import { HowItWorks } from '@/components/misbar/how-it-works'
 import { Parts } from '@/components/misbar/parts'
 import { RfqForm } from '@/components/misbar/rfq-form'
 import { Footer } from '@/components/misbar/footer'
-
-// هذا السطر هو المفتاح لحل المشكلة
-export const dynamic = 'force-dynamic'
 
 export default function Page() {
   return (
