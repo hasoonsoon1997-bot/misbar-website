@@ -1,11 +1,10 @@
 "use client";
 
-import { CheckCircle2, ArrowLeft, ArrowRight } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 
 export default function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-navy-dark text-white min-h-[90vh] flex items-center">
-      {/* فيديو الخلفية السينمائي */}
       <video
         autoPlay
         loop
@@ -16,11 +15,10 @@ export default function Hero() {
         <source src="/hero-bg.mp4" type="video/mp4" />
       </video>
 
-      {/* طبقة تعتيم متدرجة لإبراز النص */}
       <div className="absolute inset-0 bg-gradient-to-b from-navy-dark/80 via-navy-dark/60 to-navy-dark z-10" />
 
       <div className="container-x relative z-20 py-24 sm:py-32 w-full">
-        <div className="mx-auto max-w-4xl text-center space-y-8 animate-fade-up">
+        <div className="mx-auto max-w-4xl text-center space-y-8">
           
           <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-navy/60 backdrop-blur-md px-5 py-2 text-sm font-medium text-gold shadow-xl">
             <span className="h-2 w-2 rounded-full bg-gold animate-pulse" />
@@ -41,7 +39,6 @@ export default function Hero() {
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a href="#rfq" className="group relative inline-flex items-center justify-center gap-2 rounded-xl bg-gold px-8 py-4 text-lg font-bold text-navy transition-all hover:bg-yellow-500 hover:scale-105 shadow-[0_0_20px_rgba(245,165,36,0.3)]">
               اطلب عرض سعر الآن
-              <ArrowLeft className="h-5 w-5 transition-transform group-hover:-translate-x-1" />
             </a>
             <a href="#how" className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-white/5 px-8 py-4 text-lg font-bold text-white backdrop-blur-md transition-all hover:bg-white/10 hover:border-white/40">
               كيف نعمل؟
@@ -49,12 +46,7 @@ export default function Hero() {
           </div>
 
           <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {[
-              "شحن من فرانكفورت", 
-              "فحص VIN قبل الشراء", 
-              "توصيل 3-5 أيام", 
-              "فواتير أصلية"
-            ].map((item, idx) => (
+            {["شحن من فرانكفورت", "فحص VIN قبل الشراء", "توصيل 3-5 أيام", "فواتير أصلية"].map((item, idx) => (
               <div key={idx} className="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white/90 backdrop-blur-md">
                 <CheckCircle2 className="h-4 w-4 text-gold shrink-0" />
                 <span>{item}</span>
