@@ -1,42 +1,64 @@
-import { Analytics } from '@vercel/analytics/next'
-import type { Metadata, Viewport } from 'next'
-import { Cairo, Inter } from 'next/font/google'
-import './globals.css'
+import type { Metadata } from "next";
+import { Cairo, Inter } from "next/font/google";
+import "./globals.css";
+import { LanguageProvider } from "@/components/misbar/language-provider";
 
-const cairo = Cairo({ subsets: ['arabic', 'latin'], variable: '--font-cairo', display: 'swap' })
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
+const cairo = Cairo({ subsets: ["arabic", "latin"], variable: "--font-cairo", display: "swap" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+
+// ⚠️ لاحقاً عندما تشتري الدومين، غير الرابط أدناه إلى رابطك الجديد (مثلاً: https://misbar.de)
+const siteUrl = "https://misbar-website-project.vercel.app";
 
 export const metadata: Metadata = {
-  title: 'مِسبار | قطع غيار ألمانية أصلية من فرانكفورت إلى الخليج',
-  description:
-    'Misbar — German auto parts sourcing broker in Frankfurt. Genuine Mercedes, BMW, Audi and Porsche parts delivered to the GCC in 3-5 days with VIN check and original invoices.',
-  generator: 'v0.app',
-  icons: {
-    icon: [
-      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
-    apple: '/apple-icon.png',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "مِسبار | قطع غيار سيارات ألمانية أصلية من فرانكفورت",
+    template: "%s | مِسبار"
   },
-}
-
-export const viewport: Viewport = {
-  colorScheme: 'light',
-  themeColor: '#0B1F3A',
-}
+  description: "وسيط توريد قطع غيار السيارات الألمانية الأصلية (مرسيدس، BMW، أودي، بورش) للورش والأفراد في السعودية، الإمارات، الكويت، قطر والبحرين. فحص VIN مسبق، شحن جوي سريع 3-5 أيام، وأسعار تنافسية.",
+  keywords: [
+    "قطع غيار سيارات ألمانية",
+    "قطع غيار مرسيدس",
+    "قطع غيار BMW",
+    "قطع غيار أودي",
+    "قطع غيار بورش",
+    "قطع غيار السعودية",
+    "قطع غيار الإمارات",
+    "شحن قطع غيار من ألمانيا",
+    "فحص VIN",
+    "مسبار"
+  ],
+  authors: [{ name: "Misbar" }],
+  creator: "Misbar",
+  openGraph: {
+    type: "website",
+    locale: "ar_SA",
+    url: siteUrl,
+    title: "مِسبار | قطع غيار سيارات ألمانية أصلية",
+    description: "توصيل قطع غيار أصلية من فرانكفورت إلى بابك في الخليج خلال 3-5 أيام.",
+    siteName: "مِسبار",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "مِسبار | قطع غيار سيارات ألمانية أصلية",
+    description: "توصيل قطع غيار أصلية من فرانكفورت إلى بابك في الخليج خلال 3-5 أيام.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="ar" dir="rtl" className={`${cairo.variable} ${inter.variable} scroll-smooth`}>
-      <body className="bg-white antialiased">
-        {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+    <html lang="ar" dir="rtl" className={`${cairo.variable} ${inter.variable}`}>
+      <body className="bg-[#05121F] text-white antialiased">
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
-  )
+  );
 }
