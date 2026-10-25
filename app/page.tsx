@@ -7,9 +7,10 @@ import { Audience } from '@/components/misbar/audience'
 import { WhyUs } from '@/components/misbar/why-us'
 import { HowItWorks } from '@/components/misbar/how-it-works'
 import { Parts } from '@/components/misbar/parts'
+import { ShippingInfo } from '@/components/misbar/shipping-info' // السطر الجديد
 import { RfqForm } from '@/components/misbar/rfq-form'
 import { Footer } from '@/components/misbar/footer'
-import { WhatsAppButton } from '@/components/misbar/whatsapp-button' // السطر الجديد
+import { WhatsAppButton } from '@/components/misbar/whatsapp-button'
 
 export default function Page() {
   return (
@@ -21,10 +22,11 @@ export default function Page() {
         <WhyUs />
         <HowItWorks />
         <Parts />
+        <ShippingInfo /> {/* القسم الجديد */}
         <RfqForm />
       </main>
       <Footer />
-      <WhatsAppButton /> {/* الزر العائم */}
+      <WhatsAppButton />
     </LanguageProvider>
   )
 }
