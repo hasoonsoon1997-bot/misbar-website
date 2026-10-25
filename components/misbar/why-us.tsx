@@ -1,38 +1,52 @@
-'use client'
+"use client";
 
-import { Cpu, Headphones, PackageCheck, Plane, ReceiptText, ShieldCheck } from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
-import { useLanguage } from './language-provider'
-import { SectionHeading } from './section-heading'
-
-const icons: LucideIcon[] = [ShieldCheck, Plane, ReceiptText, Cpu, Headphones, PackageCheck]
+import { ShieldCheck, Plane, ReceiptText, Cpu, Headphones, PackageCheck } from "lucide-react";
 
 export function WhyUs() {
-  const { t } = useLanguage()
+  const cards = [
+    { title: "فحص VIN مسبق", desc: "نتحقق من توافق القطعة مع رقم هيكل سيارتك قبل الشراء.", icon: ShieldCheck },
+    { title: "شحن جوي سريع", desc: "من فرانكفورت مباشرة إلى بابك خلال 3-5 أيام عمل.", icon: Plane },
+    { title: "أسعار وفواتير أصلية", desc: "أقل من الوكيل، مع فواتير ألمانية رسمية تثبت الأصالة.", icon: ReceiptText },
+    { title: "قطع إلكترونية موثوقة", desc: "تخصص في ECU والحساسات ووحدات الميكاترونيك والشاشات.", icon: Cpu },
+    { title: "خدمة مخصصة", desc: "تواصل مباشر بالعربية مع فريقنا في ألمانيا.", icon: Headphones },
+    { title: "متابعة حتى التسليم", desc: "تتبع كامل للشحنة وتواصل مستمر حتى الاستلام.", icon: PackageCheck },
+  ];
 
   return (
-    <section id="why-us" aria-labelledby="why-title" className="scroll-mt-20 bg-white py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <SectionHeading id="why-title" eyebrow={t.why.eyebrow} title={t.why.title} description={t.why.description} />
+    <section id="why" className="py-24 bg-gradient-to-b from-black via-[#0B1F3A] to-black relative overflow-hidden">
+      {/* إضاءات خلفية */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-yellow-500/10 rounded-full blur-[100px]" />
+      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px]" />
 
-        <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {t.why.items.map((item, i) => {
-            const Icon = icons[i]
+      <div className="container-x relative z-10">
+        <div className="mx-auto max-w-2xl text-center mb-16">
+          <h2 className="text-3xl font-bold text-white sm:text-4xl">لماذا تختارنا؟</h2>
+          <p className="mt-4 text-lg text-gray-400">ستة أسباب تجعلنا شريكك الأول</p>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {cards.map((card, i) => {
+            const Icon = card.icon;
             return (
-              <li
-                key={item.title}
-                className="group rounded-2xl border border-slate-200 bg-white p-7 transition-all hover:-translate-y-1 hover:border-gold/50 hover:shadow-lg"
+              <div
+                key={i}
+                className="group relative p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-yellow-500/50 hover:shadow-[0_8px_30px_rgba(245,165,36,0.15)] overflow-hidden"
               >
-                <span className="flex size-12 items-center justify-center rounded-xl bg-navy/5 text-navy transition-colors group-hover:bg-gold group-hover:text-navy">
-                  <Icon className="size-6" aria-hidden="true" />
-                </span>
-                <h3 className="mt-5 text-lg font-bold text-navy">{item.title}</h3>
-                <p className="mt-2 leading-relaxed text-slate-600">{item.text}</p>
-              </li>
-            )
+                {/* تأثير لمعان داخلي */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                
+                <div className="relative z-10">
+                  <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-yellow-500/20 text-yellow-500 mb-6 group-hover:scale-110 transition-transform">
+                    <Icon className="h-7 w-7" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">{card.title}</h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">{card.desc}</p>
+                </div>
+              </div>
+            );
           })}
-        </ul>
+        </div>
       </div>
     </section>
-  )
+  );
 }
