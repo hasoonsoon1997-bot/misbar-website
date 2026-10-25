@@ -52,21 +52,21 @@ export function Footer() {
               
               {/* البريد الإلكتروني */}
               <li>
-                <a href="mailto:info@misbar.de" className="flex items-center gap-3 hover:text-yellow-500 transition-colors group">
+                <a href="mailto:" className="flex items-center gap-3 hover:text-yellow-500 transition-colors group">
                   <span className="p-2 rounded-lg bg-white/5 group-hover:bg-yellow-500/10 transition-colors">
                     <Mail className="h-5 w-5 text-yellow-500" />
                   </span>
-                  <span dir="ltr">info@misbar.de</span>
+                  <span dir="ltr">misbarfra@gmail.com</span>
                 </a>
               </li>
 
               {/* رقم الهاتف / الواتساب */}
               <li>
-                <a href="https://wa.me/491234567890" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-yellow-500 transition-colors group">
+                <a href="https://wa.me/004915786738185" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-yellow-500 transition-colors group">
                   <span className="p-2 rounded-lg bg-white/5 group-hover:bg-yellow-500/10 transition-colors">
                     <Phone className="h-5 w-5 text-yellow-500" />
                   </span>
-                  <span dir="ltr">+49 123 456 7890</span>
+                  <span dir="ltr">+49 1578 6738185</span>
                 </a>
               </li>
 
@@ -89,7 +89,7 @@ export function Footer() {
             © {currentYear} مِسبار. جميع الحقوق محفوظة. نحن وسيط توريد مستقل ولا نمثل أي وكيل رسمي لأي ماركة.
           </p>
           <div className="flex items-center gap-4">
-             <a href="https://wa.me/491234567890" target="_blank" className="text-gray-400 hover:text-green-500 transition-colors">
+             <a href="https://wa.me/004915786738185" target="_blank" className="text-gray-400 hover:text-green-500 transition-colors">
                 <MessageCircle className="w-5 h-5" />
              </a>
           </div>
