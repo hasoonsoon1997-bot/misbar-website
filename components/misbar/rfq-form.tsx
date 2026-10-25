@@ -1,13 +1,42 @@
 "use client";
 
-import { useForm, ValidationError } from "@formspree/react";
 import { Send, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { useState } from "react";
 
 export function RfqForm() {
-  // ⚠️ لا تنسى استبدال "xyzabcde" بمعرّف النموذج الخاص بك من Formspree
-  const [state, handleSubmit] = useForm("xyzabcde");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  if (state.succeeded) {
+  // ⚠️ ضع رابط الـ Endpoint الخاص بك من Formspree هنا
+  // (مثال: https://formspree.io/f/xyzabcde)
+  const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID"; 
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    const formData = new FormData(e.currentTarget);
+    
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+      
+      if (response.ok) {
+        setIsSubmitted(true);
+      } else {
+        alert("حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.");
+      }
+    } catch (error) {
+      alert("تعذر الاتصال بالخادم. يرجى التحقق من اتصالك بالإنترنت.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (isSubmitted) {
     return (
       <section id="rfq" className="py-24 bg-gradient-to-b from-[#05121F] to-[#0B1F3A] relative overflow-hidden">
         <div className="container-x relative z-10 flex flex-col items-center justify-center min-h-[400px] text-center">
@@ -30,11 +59,9 @@ export function RfqForm() {
             <p className="mt-4 text-lg text-gray-400">املأ النموذج وسيتواصل معك فريقنا خلال ساعات العمل</p>
           </div>
 
-          {/* تمت إضافة noValidate هنا لتجاوز تحقق المتصفح الإجباري */}
-          <form onSubmit={handleSubmit} noValidate className="p-8 sm:p-10 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl">
+          <form onSubmit={handleSubmit} className="p-8 sm:p-10 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl">
             <div className="grid gap-6 sm:grid-cols-2">
               
-              {/* نوع العميل */}
               <div className="sm:col-span-2 flex gap-4 mb-2">
                 <label className="flex-1 cursor-pointer">
                   <input type="radio" name="customerType" value="workshop" className="peer sr-only" defaultChecked />
@@ -53,13 +80,11 @@ export function RfqForm() {
               <div>
                 <label className="mb-2 block text-sm font-semibold text-gray-300">اسم الورشة أو الاسم الكامل *</label>
                 <input type="text" name="name" required className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500 transition-all" placeholder="مثال: ورشة النخبة" />
-                <ValidationError prefix="Name" field="name" errors={state.errors} className="text-red-400 text-xs mt-1" />
               </div>
 
               <div>
                 <label className="mb-2 block text-sm font-semibold text-gray-300">رقم الواتساب *</label>
                 <input type="tel" name="whatsapp" required className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500 transition-all text-left" placeholder="+966XXXXXXXXX" dir="ltr" />
-                <ValidationError prefix="WhatsApp" field="whatsapp" errors={state.errors} className="text-red-400 text-xs mt-1" />
               </div>
 
               <div className="sm:col-span-2">
@@ -68,13 +93,11 @@ export function RfqForm() {
                   <ShieldCheck className="w-4 h-4 text-yellow-500" />
                 </label>
                 <input type="text" name="vin" required minLength={17} maxLength={17} className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500 transition-all font-mono tracking-widest uppercase" placeholder="17 خانة (بدون I O Q)" dir="ltr" />
-                <ValidationError prefix="VIN" field="vin" errors={state.errors} className="text-red-400 text-xs mt-1" />
               </div>
 
               <div className="sm:col-span-2">
                 <label className="mb-2 block text-sm font-semibold text-gray-300">اسم القطعة أو رقمها *</label>
                 <input type="text" name="partName" required className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500 transition-all" placeholder="مثال: ECU أو رقم القطعة" />
-                <ValidationError prefix="Part" field="partName" errors={state.errors} className="text-red-400 text-xs mt-1" />
               </div>
 
               <div className="sm:col-span-2">
@@ -85,10 +108,10 @@ export function RfqForm() {
 
             <button 
               type="submit" 
-              // تم إزالة disabled={state.submitting} لضمان إمكانية الضغط دائماً أثناء الاختبار
+              disabled={isSubmitting}
               className="mt-8 w-full flex items-center justify-center gap-2 rounded-xl bg-yellow-500 px-6 py-4 text-lg font-bold text-black transition-all hover:bg-yellow-400 hover:scale-[1.02] shadow-[0_0_20px_rgba(245,165,36,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {state.submitting ? (
+              {isSubmitting ? (
                 "جاري الإرسال..."
               ) : (
                 <>
