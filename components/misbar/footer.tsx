@@ -1,92 +1,100 @@
 "use client";
 
-import { useLanguage } from '@/components/misbar/language-provider';
-import { MessageCircle, Mail, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 
 export function Footer() {
-  const { lang } = useLanguage();
-  const isAr = lang === 'ar';
-
-  const waLink = "https://wa.me/491234567890"; // يمكنك تغيير الرقم لاحقاً
+  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-navy-dark text-white pt-16 pb-8 border-t border-white/10">
-      <div className="container-x">
+    <footer className="bg-[#05121F] text-white pt-16 pb-8 border-t border-white/10 relative overflow-hidden">
+      {/* إضاءة خلفية خفيفة */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="container-x relative z-10">
         <div className="grid gap-10 md:grid-cols-3">
           
           {/* الشعار والوصف */}
           <div>
-            <div className="flex items-center gap-2">
-              <span className="grid h-10 w-10 place-items-center rounded-lg bg-gold text-navy font-bold text-xl">M</span>
-              <span className="font-bold text-xl">{isAr ? 'مِسبار' : 'Misbar'}</span>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="grid h-12 w-12 place-items-center rounded-xl bg-yellow-500 text-black font-bold text-2xl shadow-[0_0_15px_rgba(245,165,36,0.4)]">
+                M
+              </span>
+              <span className="font-bold text-2xl tracking-wide">مِسبار</span>
             </div>
-            <p className="mt-4 text-sm text-white/60 leading-relaxed">
-              {isAr 
-                ? 'وسيط توريد قطع غيار السيارات الألمانية الأصلية من ألمانيا إلى الخليج. نتحقق، نشتري، ونشحن بسرعة وشفافية.'
-                : 'Sourcing genuine German auto parts from Germany to the Gulf. We verify, buy, and ship with speed and transparency.'}
+            <p className="text-sm text-gray-400 leading-relaxed mb-6">
+              وسيط توريد قطع غيار السيارات الألمانية الأصلية من ألمانيا إلى الخليج. نتحقق، نشتري، ونشحن بسرعة وشفافية.
             </p>
           </div>
 
           {/* روابط سريعة */}
           <div>
-            <h4 className="font-bold text-gold mb-4">{isAr ? 'روابط سريعة' : 'Quick Links'}</h4>
-            <ul className="space-y-2 text-sm text-white/70">
+            <h4 className="font-bold text-lg text-white mb-6">روابط سريعة</h4>
+            <ul className="space-y-3 text-sm text-gray-400">
               <li>
-                <a href="#audience" className="hover:text-white transition-colors">
-                  {isAr ? 'خدماتنا' : 'Services'}
-                </a>
+                <a href="#audience" className="hover:text-yellow-500 transition-colors">خدماتنا</a>
               </li>
               <li>
-                <a href="#why" className="hover:text-white transition-colors">
-                  {isAr ? 'لماذا نحن' : 'Why Us'}
-                </a>
+                <a href="#why" className="hover:text-yellow-500 transition-colors">لماذا نحن</a>
               </li>
               <li>
-                <a href="#how" className="hover:text-white transition-colors">
-                  {isAr ? 'كيف نعمل' : 'How It Works'}
-                </a>
+                <a href="#shipping" className="hover:text-yellow-500 transition-colors">معلومات الشحن والجمارك</a>
               </li>
               <li>
-                <a href="#rfq" className="hover:text-white transition-colors">
-                  {isAr ? 'اطلب عرض سعر' : 'Request a Quote'}
-                </a>
+                <a href="#rfq" className="hover:text-yellow-500 transition-colors">اطلب عرض سعر</a>
               </li>
             </ul>
           </div>
 
-          {/* تواصل معنا */}
+          {/* معلومات الاتصال */}
           <div>
-            <h4 className="font-bold text-gold mb-4">{isAr ? 'تواصل معنا' : 'Contact Us'}</h4>
-            <ul className="space-y-3 text-sm text-white/70">
+            <h4 className="font-bold text-lg text-white mb-6">تواصل معنا</h4>
+            <ul className="space-y-4 text-sm text-gray-400">
+              
+              {/* البريد الإلكتروني */}
               <li>
-                <a href={waLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-white transition-colors">
-                  <MessageCircle className="h-4 w-4" />
-                  {isAr ? 'واتساب مباشر' : 'WhatsApp'}
+                <a href="mailto:info@misbar.de" className="flex items-center gap-3 hover:text-yellow-500 transition-colors group">
+                  <span className="p-2 rounded-lg bg-white/5 group-hover:bg-yellow-500/10 transition-colors">
+                    <Mail className="h-5 w-5 text-yellow-500" />
+                  </span>
+                  <span dir="ltr">info@misbar.de</span>
                 </a>
               </li>
+
+              {/* رقم الهاتف / الواتساب */}
               <li>
-                <a href="mailto:info@misbar.de" className="inline-flex items-center gap-2 hover:text-white transition-colors" dir="ltr">
-                  <Mail className="h-4 w-4" />
-                  info@misbar.de
+                <a href="https://wa.me/491234567890" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-yellow-500 transition-colors group">
+                  <span className="p-2 rounded-lg bg-white/5 group-hover:bg-yellow-500/10 transition-colors">
+                    <Phone className="h-5 w-5 text-yellow-500" />
+                  </span>
+                  <span dir="ltr">+49 123 456 7890</span>
                 </a>
               </li>
-              <li className="inline-flex items-center gap-2">
-                <MapPin className="h-4 w-4" />
-                {isAr ? 'فرانكفورت، ألمانيا' : 'Frankfurt, Germany'}
+
+              {/* الموقع */}
+              <li className="flex items-center gap-3">
+                <span className="p-2 rounded-lg bg-white/5">
+                  <MapPin className="h-5 w-5 text-yellow-500" />
+                </span>
+                <span>فرانكفورت، ألمانيا</span>
               </li>
+
             </ul>
           </div>
 
         </div>
 
         {/* الحقوق */}
-        <div className="mt-12 border-t border-white/10 pt-6 text-center text-xs text-white/40">
-          <p>
-            {isAr 
-              ? '© 2025 مِسبار. جميع الحقوق محفوظة. وسيط توريد مستقل ولا يمثل أي وكيل رسمي لأي ماركة.'
-              : '© 2025 Misbar. All rights reserved. Independent sourcing broker — not an official dealer of any brand.'}
+        <div className="mt-16 border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-gray-500">
+            © {currentYear} مِسبار. جميع الحقوق محفوظة. نحن وسيط توريد مستقل ولا نمثل أي وكيل رسمي لأي ماركة.
           </p>
+          <div className="flex items-center gap-4">
+             <a href="https://wa.me/491234567890" target="_blank" className="text-gray-400 hover:text-green-500 transition-colors">
+                <MessageCircle className="w-5 h-5" />
+             </a>
+          </div>
         </div>
+
       </div>
     </footer>
   );
