@@ -1,45 +1,52 @@
-'use client'
+"use client";
 
-import { Cog, Cpu, Fuel, Gauge, Lightbulb, Radar } from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
-import { useLanguage } from './language-provider'
-import { SectionHeading } from './section-heading'
-
-const icons: LucideIcon[] = [Cpu, Cog, Radar, Gauge, Lightbulb, Fuel]
+import { Cpu, Cog, Radar, Monitor, Lightbulb, Fuel } from "lucide-react";
 
 export function Parts() {
-  const { t } = useLanguage()
+  const items = [
+    { name: "كمبيوترات المحرك (ECU)", desc: "وحدات تحكم أصلية لجميع الماركات الألمانية.", icon: Cpu },
+    { name: "وحدات الميكاترونيك", desc: "لناقل الحركة DSG و ZF.", icon: Cog },
+    { name: "الحساسات والرادارات", desc: "حساسات وقوف ورادارات مسافة وأكسجين.", icon: Radar },
+    { name: "الشاشات الرقمية", desc: "شاشات معلومات وترفيه أصلية ووحدات تحكم.", icon: Monitor },
+    { name: "وحدات الإضاءة", desc: "LED و Xenon ووحدات تحكم إضاءة أصلية.", icon: Lightbulb },
+    { name: "مضخات وحاقنات", desc: "مضخات وقود عالية الضغط وحاقنات دقيقة.", icon: Fuel },
+  ];
 
   return (
-    <section id="parts" aria-labelledby="parts-title" className="scroll-mt-20 bg-white py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <SectionHeading
-          id="parts-title"
-          eyebrow={t.parts.eyebrow}
-          title={t.parts.title}
-          description={t.parts.description}
-        />
+    <section id="parts" className="py-24 bg-[#05121F] relative overflow-hidden">
+      {/* إضاءات خلفية */}
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-yellow-500/5 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-[120px]" />
 
-        <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {t.parts.items.map((item, i) => {
-            const Icon = icons[i]
+      <div className="container-x relative z-10">
+        <div className="mx-auto max-w-2xl text-center mb-16">
+          <h2 className="text-3xl font-bold text-white sm:text-4xl">القطع التي نركز عليها</h2>
+          <p className="mt-4 text-lg text-gray-400">قطع إلكترونية أصلية عالية القيمة وخفيفة الوزن</p>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((item, i) => {
+            const Icon = item.icon;
             return (
-              <li
-                key={item.title}
-                className="flex items-start gap-5 rounded-2xl border border-slate-200 bg-gray-50 p-6 transition-all hover:border-navy/20 hover:bg-white hover:shadow-lg"
+              <div
+                key={i}
+                className="group relative flex flex-col p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-yellow-500/50 hover:shadow-[0_8px_30px_rgba(245,165,36,0.15)] overflow-hidden"
               >
-                <span className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-navy text-gold">
-                  <Icon className="size-7" aria-hidden="true" />
-                </span>
-                <div>
-                  <h3 className="text-lg font-bold text-navy">{item.title}</h3>
-                  <p className="mt-1.5 leading-relaxed text-slate-600">{item.text}</p>
+                {/* تأثير لمعان داخلي */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                
+                <div className="relative z-10">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-yellow-500/10 text-yellow-500 mb-6 group-hover:scale-110 transition-transform">
+                    <Icon className="h-8 w-8" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">{item.name}</h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">{item.desc}</p>
                 </div>
-              </li>
-            )
+              </div>
+            );
           })}
-        </ul>
+        </div>
       </div>
     </section>
-  )
+  );
 }
