@@ -1,72 +1,65 @@
-'use client'
+"use client";
 
-import { Car, Check, Wrench } from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
-import { useLanguage } from './language-provider'
-import { SectionHeading } from './section-heading'
-
-const icons: LucideIcon[] = [Wrench, Car]
+import { Wrench, UserCheck } from "lucide-react";
 
 export function Audience() {
-  const { t } = useLanguage()
-
   return (
-    <section id="services" aria-labelledby="services-title" className="scroll-mt-20 bg-gray-50 py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <SectionHeading
-          id="services-title"
-          eyebrow={t.audience.eyebrow}
-          title={t.audience.title}
-          description={t.audience.description}
-        />
+    <section id="audience" className="py-24 bg-[#0B1F3A] relative overflow-hidden">
+      {/* إضاءة خلفية */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-yellow-500/10 rounded-full blur-[120px]" />
 
-        <div className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-2">
-          {t.audience.cards.map((card, i) => {
-            const Icon = icons[i]
-            const featured = i === 0
-            return (
-              <article
-                key={card.tag}
-                className={`relative overflow-hidden rounded-2xl p-8 shadow-sm transition-shadow hover:shadow-lg md:p-10 ${
-                  featured ? 'bg-navy text-white' : 'border border-slate-200 bg-white text-navy'
-                }`}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <span
-                    className={`flex size-14 items-center justify-center rounded-xl ${
-                      featured ? 'bg-gold text-navy' : 'bg-navy text-gold'
-                    }`}
-                  >
-                    <Icon className="size-7" aria-hidden="true" />
-                  </span>
-                  <span
-                    className={`rounded-full px-3 py-1 font-sans text-xs font-bold tracking-wider ${
-                      featured ? 'bg-white/10 text-gold' : 'bg-gold/15 text-navy'
-                    }`}
-                  >
-                    {card.tag}
-                  </span>
-                </div>
-                <h3 className="mt-8 text-2xl font-bold">{card.title}</h3>
-                <ul className="mt-6 flex flex-col gap-4">
-                  {card.points.map((point) => (
-                    <li key={point} className="flex items-center gap-3">
-                      <span
-                        className={`flex size-6 shrink-0 items-center justify-center rounded-full ${
-                          featured ? 'bg-gold/20 text-gold' : 'bg-navy/5 text-navy'
-                        }`}
-                      >
-                        <Check className="size-3.5" strokeWidth={3} aria-hidden="true" />
-                      </span>
-                      <span className={featured ? 'text-white/85' : 'text-slate-700'}>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            )
-          })}
+      <div className="container-x relative z-10">
+        <div className="mx-auto max-w-2xl text-center mb-16">
+          <h2 className="text-3xl font-bold text-white sm:text-4xl">لمن نقدم خدماتنا؟</h2>
+          <p className="mt-4 text-lg text-gray-400">خدمات مصممة لاحتياجك، سواء كنت ورشة أو فرداً</p>
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-2">
+          {/* بطاقة الورش */}
+          <div className="group relative p-10 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-yellow-500/50 hover:shadow-[0_8px_30px_rgba(245,165,36,0.15)] overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="relative z-10">
+              <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-yellow-500/20 text-yellow-500 mb-6 group-hover:scale-110 transition-transform">
+                <Wrench className="h-8 w-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">للورش ومراكز الصيانة</h3>
+              <p className="text-gray-400 leading-relaxed">
+                مورد موثوق لقطع الغيار الإلكترونية التي تحتاجها ورشتك. نوفر وقتك، نضمن الأصالة، ونسرّع دورة عملك.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {["أسعار جملة تنافسية", "قطع أصلية بضمان", "توفير وقت البحث", "تتبع كامل للطلبات"].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-sm text-gray-300">
+                    <span className="h-1.5 w-1.5 rounded-full bg-yellow-500" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* بطاقة الأفراد */}
+          <div className="group relative p-10 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:border-yellow-500/50 hover:shadow-[0_8px_30px_rgba(245,165,36,0.15)] overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="relative z-10">
+              <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-500/20 text-blue-400 mb-6 group-hover:scale-110 transition-transform">
+                <UserCheck className="h-8 w-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">للأفراد أصحاب السيارات</h3>
+              <p className="text-gray-400 leading-relaxed">
+                احصل على القطعة الأصلية لسيارتك الألمانية دون عناء البحث أو مخاطر الشراء الخاطئ. نتحقق من التوافق ونشحن لبابك.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {["فحص VIN قبل الشراء", "أسعار أفضل من الوكيل", "شحن سريع مباشر", "دعم بالعربية"].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-sm text-gray-300">
+                    <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
