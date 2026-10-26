@@ -1,27 +1,16 @@
 import { MetadataRoute } from 'next'
  
 export default function sitemap(): MetadataRoute.Sitemap {
-  // ⚠️ غير هذا الرابط لاحقاً إلى دومينك الجديد
   const baseUrl = 'https://misbar.de'
+  // تنسيق التاريخ المفضل لدى جوجل (سنة-شهر-يوم)
+  const currentDate = new Date().toISOString().split('T')[0]
  
   return [
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: 'weekly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/#rfq`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#shipping`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.5,
-    },
+      priority: 1.0,
+    }
   ]
 }
