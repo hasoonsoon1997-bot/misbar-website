@@ -7,7 +7,7 @@ const cairo = Cairo({ subsets: ["arabic", "latin"], variable: "--font-cairo", di
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 // ⚠️ لاحقاً عندما تشتري الدومين، غير الرابط أدناه إلى رابطك الجديد (مثلاً: https://misbar.de)
-const siteUrl = "https://misbar-website-project.vercel.app";
+const siteUrl = "https://misbar.de";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
