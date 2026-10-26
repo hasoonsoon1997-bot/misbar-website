@@ -1,16 +1,13 @@
 import { MetadataRoute } from 'next'
  
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://misbar.de'
-  // تنسيق التاريخ المفضل لدى جوجل (سنة-شهر-يوم)
-  const currentDate = new Date().toISOString().split('T')[0]
- 
+  const baseUrl = 'https://misbar.de';
   return [
     {
       url: baseUrl,
-      lastModified: currentDate,
+      lastModified: new Date().toISOString(),
       changeFrequency: 'weekly',
-      priority: 1.0,
+      priority: 1,
     }
   ]
 }
