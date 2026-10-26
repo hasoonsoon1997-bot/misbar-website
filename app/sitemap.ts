@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
  
 export default function sitemap(): MetadataRoute.Sitemap {
   // ⚠️ غير هذا الرابط لاحقاً إلى دومينك الجديد
-  const baseUrl = 'https://misbar-website-project.vercel.app'
+  const baseUrl = 'https://misbar.de'
  
   return [
     {
