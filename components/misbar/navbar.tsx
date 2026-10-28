@@ -16,9 +16,10 @@ export function Navbar() {
 
   const links = [
     { name: "خدماتنا", href: "/#audience" },
-    { name: "لماذا نحن", href: "/#why" },
-    { name: "كيف نعمل", href: "/#how" },
-    { name: "قطع مرسيدس", href: "/parts/mercedes" }, // الرابط الجديد
+    { name: "قطع مرسيدس", href: "/parts/mercedes" },
+    { name: "قطع BMW", href: "/parts/bmw" },
+    { name: "قطع أودي", href: "/parts/audi" },
+    { name: "قطع بورش", href: "/parts/porsche" },
     { name: "الشحن والجمارك", href: "/#shipping" },
   ];
 
@@ -26,14 +27,12 @@ export function Navbar() {
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 bg-[#05121F]/90 backdrop-blur-xl border-b border-white/10 ${scrolled ? 'shadow-lg' : ''}`}>
       <div className="container-x flex h-20 items-center justify-between">
         
-        {/* الشعار */}
         <Link href="/" className="flex items-center gap-3">
           <span className="grid h-10 w-10 place-items-center rounded-xl bg-yellow-500 text-black font-bold text-xl shadow-[0_0_15px_rgba(245,165,36,0.3)]">M</span>
           <span className="font-bold text-xl text-white tracking-wide">مِسبار</span>
         </Link>
 
-        {/* روابط سطح المكتب */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
           {links.map((link) => (
             <Link key={link.name} href={link.href} className="text-sm font-medium text-gray-300 hover:text-yellow-500 transition-colors">
               {link.name}
@@ -41,7 +40,6 @@ export function Navbar() {
           ))}
         </div>
 
-        {/* الأزرار */}
         <div className="hidden md:flex items-center gap-4">
           <button className="flex items-center gap-1 text-sm font-medium text-gray-300 hover:text-white transition-colors">
             <Globe className="w-4 h-4" />
@@ -52,13 +50,11 @@ export function Navbar() {
           </Link>
         </div>
 
-        {/* زر الهاتف */}
         <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-white p-2">
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
-      {/* قائمة الهاتف */}
       {isOpen && (
         <div className="md:hidden bg-[#05121F] border-t border-white/10 absolute w-full left-0 shadow-2xl">
           <div className="flex flex-col px-4 py-6 gap-4">
