@@ -1,3 +1,4 @@
+export const dynamicParams = false;
 import { Metadata } from 'next';
 import { FAQPageSchema } from '@/components/seo/schemas';
 import Link from 'next/link';
