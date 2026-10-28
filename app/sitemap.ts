@@ -1,21 +1,27 @@
 import { MetadataRoute } from 'next'
+import { brandsData } from '@/lib/brandsData'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://misbar.de';
   const currentDate = new Date().toISOString();
 
-  return [
+  // 1. الصفحات الثابتة
+  const staticRoutes = [
     {
       url: baseUrl,
       lastModified: currentDate,
-      changeFrequency: 'weekly',
+      changeFrequency: 'weekly' as const,
       priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/parts/mercedes`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.9,
     }
-  ]
+  ];
+
+  // 2. إنشاء روابط الماركات تلقائياً من ملف البيانات
+  const brandRoutes = Object.keys(brandsData).map((brand) => ({
+    url: `${baseUrl}/parts/${brand}`,
+    lastModified: currentDate,
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  }));
+
+  return [...staticRoutes, ...brandRoutes];
 }
