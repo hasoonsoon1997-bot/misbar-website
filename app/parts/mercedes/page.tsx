@@ -1,33 +1,34 @@
 import { Metadata } from 'next';
 import { FAQPageSchema } from '@/components/seo/schemas';
 import Link from 'next/link';
-import { ArrowLeft, ShieldCheck, Plane } from 'lucide-react';
+import { ArrowLeft, ShieldCheck, Plane, Cpu, Disc, Settings, Zap, Car, Wrench } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: "قطع غيار مرسيدس أصلية | شحن سريع من فرانكفورت للخليج - مسبار",
   description: "اطلب قطع غيار مرسيدس (Mercedes-Benz) الأصلية من ألمانيا. فحص VIN، شحن جوي سريع 3-5 أيام إلى السعودية والإمارات والكويت مع فواتير أصلية.",
-  alternates: {
-    canonical: "https://misbar.de/parts/mercedes",
-  },
+  alternates: { canonical: "https://misbar.de/parts/mercedes" },
 };
 
 export default function MercedesPage() {
   const faqs = [
-    { 
-      question: "كيف أتأكد أن قطعة غيار مرسيدس متوافقة مع سيارتي؟", 
-      answer: "نحن نطلب دائماً رقم الهيكل (VIN) المكون من 17 خانة لسيارتك. يقوم فريقنا الفني في ألمانيا بالتحقق من التوافق الدقيق للقطعة قبل الشراء والشحن." 
-    },
-    { 
-      question: "كم تستغرق مدة الشحن إلى السعودية أو الإمارات؟", 
-      answer: "نستخدم الشحن الجوي السريع من فرانكفورت. تستغرق الشحنة عادة من 3 إلى 5 أيام عمل لتصل إلى بابك، مع توفير رقم تتبع." 
-    }
+    { question: "كيف أتأكد أن قطعة غيار مرسيدس متوافقة مع سيارتي؟", answer: "نحن نطلب دائماً رقم الهيكل (VIN) المكون من 17 خانة لسيارتك. يقوم فريقنا الفني في ألمانيا بالتحقق من التوافق الدقيق للقطعة قبل الشراء والشحن." },
+    { question: "كم تستغرق مدة الشحن إلى السعودية أو الإمارات؟", answer: "نستخدم الشحن الجوي السريع من فرانكفورت. تستغرق الشحنة عادة من 3 إلى 5 أيام عمل لتصل إلى بابك، مع توفير رقم تتبع." }
+  ];
+
+  const categories = [
+    { name: "كمبيوترات المحرك (ECU)", icon: Cpu, desc: "وحدات تحكم أصلية لجميع موديلات مرسيدس." },
+    { name: "أنظمة الفرامل", icon: Disc, desc: "أقراص، فحمات، وحساسات فرامل أصلية (ABS)." },
+    { name: "الإلكترونيات والحساسات", icon: Zap, desc: "حساسات وقوف، رادارات، وشاشات معلومات." },
+    { name: "ناقل الحركة (الجير)", icon: Settings, desc: "قطع الميكاترونيك وناقل الحركة DSG." },
+    { name: "أنظمة التعليق", icon: Car, desc: "مساعدين هوائية وقطع نظام التعليق (AirMatic)." },
+    { name: "قطع الهيكل والمحرك", icon: Wrench, desc: "قطع ميكانيكية دقيقة وأصلية." },
   ];
 
   return (
     <main className="min-h-screen bg-[#05121F] text-white pt-24 pb-16" dir="rtl">
       <FAQPageSchema faqs={faqs} />
 
-      <div className="container-x mx-auto max-w-4xl px-4">
+      <div className="container-x mx-auto max-w-6xl px-4">
         <Link href="/" className="inline-flex items-center gap-2 text-yellow-500 hover:text-yellow-400 mb-8 transition-colors">
           <ArrowLeft className="w-4 h-4" />
           العودة للرئيسية
@@ -37,37 +38,63 @@ export default function MercedesPage() {
           قطع غيار <span className="text-yellow-500">مرسيدس</span> الأصلية
         </h1>
 
-        <div className="bg-white/5 border border-yellow-500/30 rounded-2xl p-6 mb-10 shadow-[0_0_30px_rgba(245,165,36,0.1)]">
+        {/* AEO Box */}
+        <div className="bg-white/5 border border-yellow-500/30 rounded-2xl p-6 mb-12 shadow-[0_0_30px_rgba(245,165,36,0.1)]">
           <p className="text-lg leading-relaxed text-gray-300">
             <strong className="text-white">مسبار</strong> هو وسيطك الموثوق لتوريد قطع غيار <strong className="text-white">مرسيدس-بنز (Mercedes-Benz)</strong> الأصلية مباشرة من فرانكفورت، ألمانيا. نوفر فحص توافق رقم الهيكل (VIN)، وشحن جوي سريع خلال 3-5 أيام إلى السعودية، الإمارات، الكويت، قطر، والبحرين، مع توفير فواتير ألمانية رسمية لضمان الأصالة.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
-          <div className="bg-white/5 p-6 rounded-xl border border-white/10">
-            <ShieldCheck className="w-8 h-8 text-yellow-500 mb-4" />
-            <h3 className="text-xl font-bold mb-2">أصالة 100%</h3>
-            <p className="text-gray-400">قطع غيار أصلية (OEM) مع فواتير رسمية من ألمانيا.</p>
-          </div>
-          <div className="bg-white/5 p-6 rounded-xl border border-white/10">
-            <Plane className="w-8 h-8 text-yellow-500 mb-4" />
-            <h3 className="text-xl font-bold mb-2">شحن سريع</h3>
-            <p className="text-gray-400">توصيل جوي مباشر من فرانكفورت إلى بابك خلال أيام.</p>
-          </div>
-        </div>
-
-        <h2 className="text-2xl font-bold mb-6">الأسئلة الشائعة حول قطع مرسيدس</h2>
-        <div className="space-y-4 mb-12">
-          {faqs.map((faq, index) => (
-            <div key={index} className="bg-white/5 p-6 rounded-xl border border-white/10">
-              <h3 className="font-bold text-lg mb-2 text-yellow-500">{faq.question}</h3>
-              <p className="text-gray-300">{faq.answer}</p>
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-2 gap-6 mb-16">
+          <div className="bg-white/5 p-6 rounded-xl border border-white/10 flex gap-4 items-start">
+            <ShieldCheck className="w-8 h-8 text-yellow-500 shrink-0" />
+            <div>
+              <h3 className="text-xl font-bold mb-2">أصالة 100%</h3>
+              <p className="text-gray-400 text-sm">قطع غيار أصلية (OEM) مع فواتير رسمية من ألمانيا.</p>
             </div>
-          ))}
+          </div>
+          <div className="bg-white/5 p-6 rounded-xl border border-white/10 flex gap-4 items-start">
+            <Plane className="w-8 h-8 text-yellow-500 shrink-0" />
+            <div>
+              <h3 className="text-xl font-bold mb-2">شحن سريع</h3>
+              <p className="text-gray-400 text-sm">توصيل جوي مباشر من فرانكفورت إلى بابك خلال أيام.</p>
+            </div>
+          </div>
         </div>
 
-        <div className="text-center">
-          <Link href="/#rfq" className="inline-flex items-center justify-center rounded-xl bg-yellow-500 px-8 py-4 text-lg font-bold text-black transition-all hover:bg-yellow-400 hover:scale-105">
+        {/* Parts Categories Grid */}
+        <div className="mb-16">
+          <h2 className="text-2xl font-bold mb-8 text-center">فئات القطع التي نوفرها لمرسيدس</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {categories.map((cat, idx) => (
+              <div key={idx} className="bg-white/5 p-6 rounded-xl border border-white/10 hover:border-yellow-500/50 transition-colors group">
+                <cat.icon className="w-10 h-10 text-gray-400 group-hover:text-yellow-500 mb-4 transition-colors" />
+                <h3 className="text-lg font-bold mb-2">{cat.name}</h3>
+                <p className="text-gray-400 text-sm">{cat.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        <div className="mb-16">
+          <h2 className="text-2xl font-bold mb-6">الأسئلة الشائعة حول قطع مرسيدس</h2>
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div key={index} className="bg-white/5 p-6 rounded-xl border border-white/10">
+                <h3 className="font-bold text-lg mb-2 text-yellow-500">{faq.question}</h3>
+                <p className="text-gray-300 text-sm">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div className="text-center bg-gradient-to-t from-yellow-500/10 to-transparent p-10 rounded-3xl border border-white/5">
+          <h2 className="text-3xl font-bold mb-4">هل تبحث عن قطعة مرسيدس محددة؟</h2>
+          <p className="text-gray-400 mb-8">أرسل لنا رقم الهيكل (VIN) واسم القطعة، وسنوافيك بالسعر والتوفر فوراً.</p>
+          <Link href="/#rfq" className="inline-flex items-center justify-center rounded-xl bg-yellow-500 px-10 py-4 text-lg font-bold text-black transition-all hover:bg-yellow-400 hover:scale-105 shadow-[0_0_20px_rgba(245,165,36,0.3)]">
             اطلب قطعة مرسيدس الآن
           </Link>
         </div>
