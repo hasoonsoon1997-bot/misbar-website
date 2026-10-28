@@ -5,11 +5,14 @@ import { ArrowLeft, ShieldCheck, Plane, Cpu, Disc, Settings, Zap, Car, Wrench } 
 import { brandsData } from '@/lib/brandsData';
 import { notFound } from 'next/navigation';
 
+// 1. إجبار الصفحة على عدم الاعتماد على الكاش الثابت
+export const dynamicParams = true; 
+
 type Props = {
   params: { brand: string };
 };
 
-// هذه الدالة تخبر Next.js ببناء صفحات الماركات الأربعة مسبقاً
+// 2. التأكد من أن دالة البناء المسبق ترجع جميع الماركات
 export async function generateStaticParams() {
   return Object.keys(brandsData).map((brand) => ({
     brand: brand,
@@ -17,13 +20,10 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // استخدام ?. لمنع الخطأ إذا كانت params غير معرفة
   const brandKey = params?.brand?.toLowerCase();
   const brand = brandKey ? brandsData[brandKey] : null;
 
-  if (!brand) {
-    return { title: 'غير موجود' };
-  }
+  if (!brand) return { title: 'غير موجود' };
 
   return {
     title: brand.title,
@@ -33,13 +33,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default function BrandPage({ params }: Props) {
-  // استخدام ?. مرة أخرى هنا
   const brandKey = params?.brand?.toLowerCase();
   const brand = brandKey ? brandsData[brandKey] : null;
 
-  if (!brand) {
-    notFound();
-  }
+  if (!brand) notFound();
 
   const categories = [
     { name: "كمبيوترات المحرك (ECU)", icon: Cpu, desc: "وحدات تحكم أصلية لجميع الموديلات." },
@@ -53,40 +50,26 @@ export default function BrandPage({ params }: Props) {
   return (
     <main className="min-h-screen bg-[#05121F] text-white pt-24 pb-16" dir="rtl">
       <FAQPageSchema faqs={brand.faqs} />
-
       <div className="container-x mx-auto max-w-6xl px-4">
         <Link href="/" className="inline-flex items-center gap-2 text-yellow-500 hover:text-yellow-400 mb-8 transition-colors">
-          <ArrowLeft className="w-4 h-4" />
-          العودة للرئيسية
+          <ArrowLeft className="w-4 h-4" /> العودة للرئيسية
         </Link>
-
         <h1 className="text-4xl md:text-5xl font-bold mb-6">
           قطع غيار <span className="text-yellow-500">{brand.nameAr}</span> الأصلية
         </h1>
-
         <div className="bg-white/5 border border-yellow-500/30 rounded-2xl p-6 mb-12 shadow-[0_0_30px_rgba(245,165,36,0.1)]">
-          <p className="text-lg leading-relaxed text-gray-300">
-            {brand.answerFirst}
-          </p>
+          <p className="text-lg leading-relaxed text-gray-300">{brand.answerFirst}</p>
         </div>
-
         <div className="grid md:grid-cols-2 gap-6 mb-16">
           <div className="bg-white/5 p-6 rounded-xl border border-white/10 flex gap-4 items-start">
             <ShieldCheck className="w-8 h-8 text-yellow-500 shrink-0" />
-            <div>
-              <h3 className="text-xl font-bold mb-2">أصالة 100%</h3>
-              <p className="text-gray-400 text-sm">قطع غيار أصلية (OEM) مع فواتير رسمية من ألمانيا.</p>
-            </div>
+            <div><h3 className="text-xl font-bold mb-2">أصالة 100%</h3><p className="text-gray-400 text-sm">قطع غيار أصلية (OEM) مع فواتير رسمية من ألمانيا.</p></div>
           </div>
           <div className="bg-white/5 p-6 rounded-xl border border-white/10 flex gap-4 items-start">
             <Plane className="w-8 h-8 text-yellow-500 shrink-0" />
-            <div>
-              <h3 className="text-xl font-bold mb-2">شحن سريع</h3>
-              <p className="text-gray-400 text-sm">توصيل جوي مباشر من فرانكفورت إلى بابك خلال أيام.</p>
-            </div>
+            <div><h3 className="text-xl font-bold mb-2">شحن سريع</h3><p className="text-gray-400 text-sm">توصيل جوي مباشر من فرانكفورت إلى بابك خلال أيام.</p></div>
           </div>
         </div>
-
         <div className="mb-16">
           <h2 className="text-2xl font-bold mb-8 text-center">فئات القطع التي نوفرها لـ {brand.nameAr}</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -99,7 +82,6 @@ export default function BrandPage({ params }: Props) {
             ))}
           </div>
         </div>
-
         <div className="mb-16">
           <h2 className="text-2xl font-bold mb-6">الأسئلة الشائعة حول قطع {brand.nameAr}</h2>
           <div className="space-y-4">
@@ -111,7 +93,6 @@ export default function BrandPage({ params }: Props) {
             ))}
           </div>
         </div>
-
         <div className="text-center bg-gradient-to-t from-yellow-500/10 to-transparent p-10 rounded-3xl border border-white/5">
           <h2 className="text-3xl font-bold mb-4">هل تبحث عن قطعة {brand.nameAr} محددة؟</h2>
           <p className="text-gray-400 mb-8">أرسل لنا رقم الهيكل (VIN) واسم القطعة، وسنوافيك بالسعر والتوفر فوراً.</p>
