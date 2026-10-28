@@ -9,7 +9,7 @@ type Props = {
   params: { brand: string };
 };
 
-// هذه الميزة تخبر Next.js ببناء صفحات الماركات الأربعة مسبقاً لسرعة فائقة
+// هذه الدالة تخبر Next.js ببناء صفحات الماركات الأربعة مسبقاً
 export async function generateStaticParams() {
   return Object.keys(brandsData).map((brand) => ({
     brand: brand,
@@ -17,8 +17,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const brandKey = params.brand.toLowerCase();
-  const brand = brandsData[brandKey];
+  // استخدام ?. لمنع الخطأ إذا كانت params غير معرفة
+  const brandKey = params?.brand?.toLowerCase();
+  const brand = brandKey ? brandsData[brandKey] : null;
 
   if (!brand) {
     return { title: 'غير موجود' };
@@ -32,8 +33,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default function BrandPage({ params }: Props) {
-  const brandKey = params.brand.toLowerCase();
-  const brand = brandsData[brandKey];
+  // استخدام ?. مرة أخرى هنا
+  const brandKey = params?.brand?.toLowerCase();
+  const brand = brandKey ? brandsData[brandKey] : null;
 
   if (!brand) {
     notFound();
