@@ -1,4 +1,3 @@
-export const dynamicParams = false;
 import { Metadata } from 'next';
 import { FAQPageSchema } from '@/components/seo/schemas';
 import Link from 'next/link';
@@ -6,14 +5,10 @@ import { ArrowLeft, ShieldCheck, Plane, Cpu, Disc, Settings, Zap, Car, Wrench } 
 import { brandsData } from '@/lib/brandsData';
 import { notFound } from 'next/navigation';
 
-// 1. إجبار الصفحة على عدم الاعتماد على الكاش الثابت
-export const dynamicParams = true; 
-
 type Props = {
   params: { brand: string };
 };
 
-// 2. التأكد من أن دالة البناء المسبق ترجع جميع الماركات
 export async function generateStaticParams() {
   return Object.keys(brandsData).map((brand) => ({
     brand: brand,
