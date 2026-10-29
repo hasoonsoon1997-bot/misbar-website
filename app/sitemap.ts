@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { brandsData } from '@/lib/brandsData'
+import { blogData } from '@/lib/blogData'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://misbar.de';
@@ -11,14 +12,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
     }
   ];
 
-  // إضافة صفحات الماركات والفئات تلقائياً
+  // إضافة الماركات والفئات
   for (const brandKey in brandsData) {
     const brand = brandsData[brandKey];
-    
-    // رابط الماركة (Hub)
     routes.push({
       url: `${baseUrl}/parts/${brandKey}`,
       lastModified: currentDate,
@@ -26,7 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     });
 
-    // روابط الفئات (Spoke)
     for (const cat of brand.categories) {
       routes.push({
         url: `${baseUrl}/parts/${brandKey}/${cat.slug}`,
@@ -35,6 +39,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
       });
     }
+  }
+
+  // إضافة المقالات
+  for (const slug in blogData) {
+    routes.push({
+      url: `${baseUrl}/blog/${slug}`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    });
   }
 
   return routes;
