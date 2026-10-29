@@ -21,7 +21,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   ];
 
-  // إضافة الماركات والفئات
   for (const brandKey in brandsData) {
     const brand = brandsData[brandKey];
     routes.push({
@@ -41,7 +40,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  // إضافة المقالات
   for (const slug in blogData) {
     routes.push({
       url: `${baseUrl}/blog/${slug}`,
