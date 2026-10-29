@@ -7,7 +7,9 @@ import { notFound } from 'next/navigation';
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  return Object.keys(blogData).map((slug) => ({ slug }));
+  return Object.keys(blogData).map((slug) => ({
+    slug: slug,
+  }));
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
@@ -23,13 +25,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
   const post = blogData[params.slug];
-  if (!post) notFound();
+  
+  if (!post) {
+    notFound();
+  }
 
   return (
     <main className="min-h-screen bg-[#05121F] text-white pt-24 pb-16" dir="rtl">
       <div className="container-x mx-auto max-w-3xl px-4">
-        <Link href="/" className="inline-flex items-center gap-2 text-yellow-500 hover:text-yellow-400 mb-8">
-          <ArrowLeft className="w-4 h-4" /> العودة للرئيسية
+        <Link href="/blog" className="inline-flex items-center gap-2 text-yellow-500 hover:text-yellow-400 mb-8">
+          <ArrowLeft className="w-4 h-4" /> العودة للمدونة
         </Link>
         
         <h1 className="text-3xl md:text-5xl font-bold mb-4">{post.title}</h1>
