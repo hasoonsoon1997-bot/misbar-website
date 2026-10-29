@@ -21,6 +21,13 @@ export function Navbar() {
     { name: "قطع أودي", href: "/parts/audi" },
     { name: "قطع بورش", href: "/parts/porsche" },
     { name: "الشحن والجمارك", href: "/#shipping" },
+    const links = [
+  { name: "خدماتنا", href: "/#audience" },
+  { name: "قطع مرسيدس", href: "/parts/mercedes" },
+  { name: "قطع BMW", href: "/parts/bmw" },
+  { name: "المدونة", href: "/blog" }, // السطر الجديد
+  { name: "الشحن والجمارك", href: "/#shipping" },
+];
   ];
 
   return (
