@@ -5,23 +5,37 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://misbar.de';
   const currentDate = new Date().toISOString();
 
-  // 1. الصفحات الثابتة
-  const staticRoutes = [
+  const routes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: currentDate,
-      changeFrequency: 'weekly' as const,
+      changeFrequency: 'weekly',
       priority: 1.0,
     }
   ];
 
-  // 2. إنشاء روابط الماركات تلقائياً من ملف البيانات
-  const brandRoutes = Object.keys(brandsData).map((brand) => ({
-    url: `${baseUrl}/parts/${brand}`,
-    lastModified: currentDate,
-    changeFrequency: 'weekly' as const,
-    priority: 0.9,
-  }));
+  // إضافة صفحات الماركات والفئات تلقائياً
+  for (const brandKey in brandsData) {
+    const brand = brandsData[brandKey];
+    
+    // رابط الماركة (Hub)
+    routes.push({
+      url: `${baseUrl}/parts/${brandKey}`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    });
 
-  return [...staticRoutes, ...brandRoutes];
+    // روابط الفئات (Spoke)
+    for (const cat of brand.categories) {
+      routes.push({
+        url: `${baseUrl}/parts/${brandKey}/${cat.slug}`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly',
+        priority: 0.8,
+      });
+    }
+  }
+
+  return routes;
 }
